@@ -1,5 +1,6 @@
 package manager;
 
+import model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,6 +22,11 @@ public class HelperUser extends HelperBase{
 //        loginTab.click();
         click(By.xpath("//a[text() = ' Sign up ']"));
     }
+    public void fillLoginRegistrationForm(User user) {
+        type(By.xpath("//input[@id = 'email']"), user.getEmail());
+        type(By.xpath("//input[@id = 'password']"), user.getPassword());
+    }
+
     public void fillLoginRegistrationForm(String email, String password){
 //        WebElement emailInput = wd.findElement(By.xpath("//*[text() = 'Email ']"));
 //        emailInput.click();
@@ -55,5 +61,9 @@ public class HelperUser extends HelperBase{
 
     public void logout() {
         click(By.xpath("//*[text() =' Logout ']"));
+    }
+
+    public String getErrorText() {
+        return wd.findElement(By.xpath("//div[@class = 'error']")).getText();
     }
 }
