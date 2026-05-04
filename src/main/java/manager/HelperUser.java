@@ -40,8 +40,20 @@ public class HelperUser extends HelperBase{
 
     public String getMessage(){
         WebElement element = wd.findElement(By.xpath("//h2[@class = 'message']"));
+        //pause(2000);
         return element.getText();
     }
 
 
+    public void clickOkButton() {
+        click(By.xpath("//button[text() = 'Ok']"));
+    }
+
+    public boolean isLogged() {
+        return isElementPresent(By.xpath("//*[text() =' Logout ']"));
+    }
+
+    public void logout() {
+        click(By.xpath("//*[text() =' Logout ']"));
+    }
 }
