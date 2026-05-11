@@ -41,13 +41,15 @@ public class HelperUser extends HelperBase{
 
     public String getMessage(){
         WebElement element = wd.findElement(By.xpath("//h2[@class = 'message']"));
-        //pause(2000);
+        pause(2000);
         return element.getText();
     }
 
 
     public void clickOkButton() {
-        click(By.xpath("//button[text() = 'Ok']"));
+        if (isElementPresent(By.xpath("//button[text()='Ok']"))) {
+            click(By.xpath("//button[text()='Ok']"));
+        }
     }
 
     public boolean isLogged() {
@@ -60,6 +62,15 @@ public class HelperUser extends HelperBase{
 
     public String getErrorText() {
         return wd.findElement(By.xpath("//div[@class = 'error']")).getText();
+    }
+
+    public boolean isYallaButtonNotActive() {
+        boolean res = isElementPresent(By.cssSelector("button[disabled]"));
+        //var2
+        WebElement element = wd.findElement(By.cssSelector("button[type = 'submit']"));
+        boolean result = element.isEnabled();
+
+        return res && !result;
     }
 
     /// =============registration
@@ -94,14 +105,18 @@ public class HelperUser extends HelperBase{
     }
 
     public void checkPolicyXY(){
-        WebElement lable = wd.findElement(By.cssSelector("label[for = 'terms-of-use']"));
-        Rectangle rectangle = lable.getRect();
-        int w = rectangle.getWidth();
-        int xOfSet = -w/2;
+        if (!wd.findElement(By.id("terms-of-use")).isSelected()) {
+            WebElement lable = wd.findElement(By.cssSelector("label[for = 'terms-of-use']"));
+            Rectangle rectangle = lable.getRect();
+            int w = rectangle.getWidth();
+            int xOfSet = -w / 2;
 //        Dimension size = wd.manage().window().getSize();
 //        size.getWidth();
-        Actions actions = new Actions(wd);
-        actions.moveToElement(lable, xOfSet, 0).click().release().perform();
+            Actions actions = new Actions(wd);
+            actions.moveToElement(lable, xOfSet, 0).click().release().perform();
+        }
     }
+
+
 
 }

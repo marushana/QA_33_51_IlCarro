@@ -33,26 +33,27 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().checkPolicyXY();
         app.getHelperUser().submit();
         Assert.assertEquals(app.getHelperUser().getMessage(), "You are logged in success");
-        app.getHelperUser().clickOkButton();
-        app.getHelperUser().pause(5000);
+//        app.getHelperUser().clickOkButton();
+
     }
 
     @Test
     public void registrationNameBlank(){
-        Random random = new Random();
-        int i = random.nextInt(1000)+1000;
-        User user = new User().setName("").setLastName("Toyyy").setEmail("toy"+i+"@gmail.com").setPassword("Toy46213&");
+//        Random random = new Random();
+//        int i = random.nextInt(1000)+1000;
+        User user = new User().setName("").setLastName("Toyyy").setEmail("toy@gmail.com").setPassword("Toy46213&");
         app.getHelperUser().openRegistrationForm();
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicyXY();
         app.getHelperUser().submit();
         Assert.assertEquals(app.getHelperUser().getErrorText(), "Name is required");
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
     }
 
     @Test
     public void registrationLastNameBlank(){
-        int i = (int) ((System.currentTimeMillis()/1000)%3600);
-        User user = new User().setName("Toy").setLastName("").setEmail("toy"+i+"@gmail.com").setPassword("Toy46213&");
+//        int i = (int) ((System.currentTimeMillis()/1000)%3600);
+        User user = new User().setName("Toy").setLastName("").setEmail("toy@gmail.com").setPassword("Toy46213&");
         app.getHelperUser().openRegistrationForm();
         app.getHelperUser().pause(5000);
         app.getHelperUser().fillRegistrationForm(user);
@@ -63,22 +64,22 @@ public class RegistrationTests extends TestBase{
 
     @Test
     public void registrationEmailWrong(){
-        Random random = new Random();
-        int i = random.nextInt(1000)+1000;
-        User user = new User().setName("Toy").setLastName("Toyoyoy").setEmail("toy"+i+"gmail.com").setPassword("Toy46213&");
+//        Random random = new Random();
+//        int i = random.nextInt(1000)+1000;
+        User user = new User().setName("Toy").setLastName("Toyoyoy").setEmail("toygmail.com").setPassword("Toy46213&");
         app.getHelperUser().openRegistrationForm();
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicyXY();
         app.getHelperUser().submit();
         Assert.assertEquals(app.getHelperUser().getErrorText(), "Wrong email format\n" +
                 "Wrong email format");
-        app.getHelperUser().pause(5000);
+
 
     }
 
     @Test
     public void registrationEmailBlank(){
-        int i = (int) ((System.currentTimeMillis()/1000)%3600);
+//        int i = (int) ((System.currentTimeMillis()/1000)%3600);
         User user = new User().setName("tot").setLastName("touuu").setEmail("").setPassword("Toy46213&");
         app.getHelperUser().openRegistrationForm();
         app.getHelperUser().fillRegistrationForm(user);
@@ -90,8 +91,8 @@ public class RegistrationTests extends TestBase{
 
     @Test
     public void registrationPasswordWrongSpecialSymbol(){
-        int i = (int) ((System.currentTimeMillis()/1000)%3600);
-        User user = new User().setName("You").setLastName("Are").setEmail("learning"+i+"@gmail.com").setPassword("Toy46215");
+//        int i = (int) ((System.currentTimeMillis()/1000)%3600);
+        User user = new User().setName("You").setLastName("Are").setEmail("learning@gmail.com").setPassword("Toy46215");
         app.getHelperUser().openRegistrationForm();
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicyXY();
@@ -102,8 +103,8 @@ public class RegistrationTests extends TestBase{
 
     @Test
     public void registrationPasswordWrongLessSymbols(){
-        int i = (int) ((System.currentTimeMillis()/1000)%3600);
-        User user = new User().setName("You").setLastName("Are").setEmail("learning"+i+"@gmail.com").setPassword("Toy462&");
+//        int i = (int) ((System.currentTimeMillis()/1000)%3600);
+        User user = new User().setName("You").setLastName("Are").setEmail("learning@gmail.com").setPassword("Toy462&");
         app.getHelperUser().openRegistrationForm();
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicyXY();
@@ -126,8 +127,8 @@ public class RegistrationTests extends TestBase{
 
     }
 
-//    @AfterMethod
-//    public void postCondition(){
-//        app.getHelperUser().clickOkButton();
-//    }
+    @AfterMethod
+    public void postCondition(){
+        app.getHelperUser().clickOkButton();
+    }
 }
