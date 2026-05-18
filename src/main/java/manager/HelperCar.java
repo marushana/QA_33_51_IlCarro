@@ -1,6 +1,10 @@
 package manager;
 
+import model.Car;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class HelperCar extends HelperBase{
 
@@ -9,4 +13,39 @@ public class HelperCar extends HelperBase{
     }
 
 
+    public void openCarForm() {
+        click(By.xpath("//a[text() = ' Let the car work ']"));
+    }
+
+    public void fillCarForm(Car car) {
+        type(By.id("pickUpPlace"), car.getLocation());
+        click(By.xpath("//*[text() = 'OK']"));
+        type(By.id("make"), car.getManufacture());
+        type(By.id("model"), car.getModel());
+        type(By.id("year"), car.getYear());
+        select(By.id("fuel"), car.getFuel());
+        type(By.id("seats"), String.valueOf(car.getSeats()));
+        type(By.id("class"), car.getCarClass());
+        type(By.id("serialNumber"), car.getCarRegNum());
+        type(By.id("price"), String.valueOf(car.getPrice()));//car.getPrise+""
+        type(By.id("about"), car.getAbout());
+
+
+
+    }
+
+    private void select(By locator, String option) {
+        Select select = new Select(wd.findElement(locator));
+        select.selectByValue(option);
+    }
+
+    public void submitCarForm() {
+        JavascriptExecutor js = (JavascriptExecutor) wd;
+        js.executeScript("document.querySelector(\"button[type='submit']\").removeAttribute(\"disabled\")");
+        click(By.xpath("//button[@type ='submit']"));
+    }
+
+    public void attachPhoto(String link) {
+        wd.findElement(By.cssSelector("#photos")).sendKeys(link);
+    }
 }
