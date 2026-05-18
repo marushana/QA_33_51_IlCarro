@@ -31,6 +31,7 @@ public class AddNewCarTests extends TestBase{
                 .about("Nice car")
                 .build();
 
+
         app.getHelperCar().openCarForm();
         app.getHelperCar().fillCarForm(car);
         app.getHelperCar().attachPhoto("C:\\Users\\marus\\Qa33\\QA_33_51_IlCarro\\Bugatti_Veyron_16.4_–_Frontansicht_(1),_5._April_2012,_Düsseldorf 2.jpg");
